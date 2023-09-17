@@ -29,15 +29,24 @@ const HomePage = () => {
     
     const getLink = async () => {
 
-      const res =  await axios.get(`/api/seo/${url[0]}`);
-      console.log("api", res.data)
-      setresults(res.data.auth.tasks[0].result)
-      const {name, cms, server, ssl_info} = res.data.auth.tasks[0].result[0].domain_info
+      let res =  await axios.get(`/api/seo/${url[0]}`);
+      // console.log("api", res.data)
+      const {taskId} = res.data;
+
+      await new Promise((resolve) => setTimeout(resolve, 10000));
+
+      res = await axios.get(`/api/summary/${taskId}`);
+
+      console.log(res);
+      setresults(res.data.taskResponse.tasks[0].result)
+      const {name, cms, server, ssl_info} = res.data.taskResponse.tasks[0].result[0].domain_info
       setSiteInfo({name, cms, server, ssl_info})
-      setPageMetrics(res.data.auth.tasks[0].result[0].page_metrics);
-      setOnPageScore(res.data.auth.tasks[0].result[0].page_metrics.onpage_score)
+      setPageMetrics(res.data.taskResponse.tasks[0].result[0].page_metrics);
+      setOnPageScore(res.data.taskResponse.tasks[0].result[0].page_metrics.onpage_score)
 
       sethasFetched(true)
+
+
     }
 
     // console.log(summary.tasks[0].result)
@@ -53,7 +62,11 @@ const HomePage = () => {
   
 
   if(!hasFetched){
-    return <BeatLoader color="#36d7b7" />
+    return (
+    <div className='flex flex-col items-center justify-center w-full h-full mx-auto'>
+
+      <BeatLoader color="#36d7b7" />
+    </div>)
   }
   else{
     return (
