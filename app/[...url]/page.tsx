@@ -12,7 +12,7 @@ import OnPage from '../components/result/OnPage'
 import PageChecks from '../components/result/PageChecks'
 
 
-const page = () => {
+const HomePage = () => {
 
   const {url} = useParams();
   const [results, setresults] = useState<any[]>([])
@@ -43,7 +43,7 @@ const page = () => {
     getLink();
     // getTaskId(url[0]);
 
-  }, [])
+  }, [url])
 
   // const results = summary.tasks[0].result;
   
@@ -72,4 +72,4 @@ const page = () => {
 
 }
 
-export default page
+export default HomePage
