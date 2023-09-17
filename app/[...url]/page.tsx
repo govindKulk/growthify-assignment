@@ -10,6 +10,7 @@ import SiteInfo from '../components/result/SiteInfo'
 import PageScore from '../components/result/PageScore'
 import OnPage from '../components/result/OnPage'
 import PageChecks from '../components/result/PageChecks'
+import { BeatLoader } from 'react-spinners'
 
 
 const HomePage = () => {
@@ -52,7 +53,7 @@ const HomePage = () => {
   
 
   if(!hasFetched){
-    return 
+    return <BeatLoader color="#36d7b7" />
   }
   else{
     return (
