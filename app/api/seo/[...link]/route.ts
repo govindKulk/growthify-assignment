@@ -42,7 +42,7 @@ export async function GET (request: NextRequest, {params}: {params: IParams}){
 
         const taskId = response.data.tasks[0].id
 
-        await new Promise((resolve) => setTimeout(resolve, 10000));
+        await new Promise((resolve) => setTimeout(resolve, 7000));
 
         const taskResponse = await axios.get(`https://api.dataforseo.com/v3/on_page/summary/${taskId}`,{headers})
 
